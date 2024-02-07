@@ -12,10 +12,7 @@ turtle.shape(image)
 while len(guessed_state) < 50:
     answer_state = turtle.textinput(title=f'Guessed {len(guessed_state)}/50 states ', prompt="Enter the state's name").title()
     if answer_state == "Exit":
-        missing_states = []
-        for state in df['state'].unique():
-            if state not in guessed_state:
-                missing_states.append(state)
+        missing_states = [state for state in df['state'].unique() if state not in guessed_state]
         new_df = pd.DataFrame(missing_states)
         new_df.to_csv('States to learn.csv')
         break
