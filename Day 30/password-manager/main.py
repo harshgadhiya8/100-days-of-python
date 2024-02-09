@@ -3,6 +3,7 @@ from tkinter import messagebox
 from random import randint,choice,shuffle
 import pyperclip
 import json
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def pass_generator():
     alphabet = [chr(i) for i in range(ord('A'), ord('Z')+1)] + [chr(i) for i in range(ord('a'), ord('z')+1)]
@@ -50,6 +51,22 @@ def save_details():
             web_entry.delete(0,END)
             pass_entry.delete(0,END)
 
+# ---------------------------- FIND PASSWORD ------------------------------- #
+def find_pass():
+    web = web_entry.get()
+    try:
+        with open('data.json') as data:
+            file = json.load(data)
+    except FileNotFoundError:
+        messagebox.showinfo(title='Error', message = 'No data file found')
+    else:
+        if web in file:
+                email = file[web]["email"]
+                password = file[web]['password']
+                messagebox.showinfo(title=web, message=f"Email: {email}\nPassword: {password}")
+        else:
+            messagebox.showinfo(title='Error',message=f'There is no entry for {web}')
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title('Password Manager')
@@ -86,6 +103,7 @@ pass_button.grid(column=2,row=3)
 add_button = Button(text="Add",width=33,command=save_details)
 add_button.grid(column=1,row=4,columnspan=2)
 
-
+search_button = Button(text='Search',width=13,command=find_pass)
+search_button.grid(column=2,row=1)
 
 window.mainloop()
