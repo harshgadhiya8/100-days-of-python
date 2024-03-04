@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>HTML forms
+        </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>        
+    <form action="{{url_for('receive_data')}}" method="post">
+  <label for="username">Username:</label>
+  <input type="text" id="uname" name="uname"><br><br>
+  <label for="password">Paasword:</label>
+  <input type="text" id="pws" name="pws"><br><br>
+  <input type="submit" value="Submit">
+</form>
+    </body>
+</html>
